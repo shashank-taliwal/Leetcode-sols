@@ -1,11 +1,6 @@
 class Solution {
-        int getScore(int a, int b){
+        inline int getScore(int a, int b){
                 return a+b;
-        }
-        void debug(vector<int> debug_scores){
-                for(int score: debug_scores){
-                        cout<<score<<" ";
-                }
         }
 public:
     vector<int> maxScoreIndices(vector<int>& nums) {
