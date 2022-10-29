@@ -25,7 +25,6 @@ public:
                     prefixPlantTime+=garden[i].plantTime;
                     ans=max(ans,prefixPlantTime+garden[i].growTime);
             }
-            // ans+=garden.back().growTime;
             return ans;
     }
 };
