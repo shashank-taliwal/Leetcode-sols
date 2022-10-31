@@ -10,8 +10,8 @@
  * };
  */
 class Solution {
-        map<int,int> height_subtree;
-        map<int, int> level;
+        unordered_map<int,int> height_subtree;
+        unordered_map<int, int> level;
         int getHeight(TreeNode* root){
                 if(height_subtree[root->val]>0) return height_subtree[root->val];
                 if(root->left==NULL and root->right==NULL){
