@@ -1,18 +1,18 @@
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int,int> m1;
         vector<int> ans;
-        for(int i=0;i<nums.size();i++){
-            int searchValue=target-nums[i];
-            if(m1.find(searchValue)!=m1.end()){
-                ans.push_back(i);
-                ans.push_back(m1[searchValue]);
+            unordered_map<int,int> hashMap;
+            for(int i=0;i<nums.size();i++){
+                    int compliment=target-nums[i];
+                    if(hashMap.find(compliment)!=hashMap.end()){
+                            ans.push_back(hashMap[compliment]);
+                            ans.push_back(i);
+                    }
+                    else{
+                            hashMap[nums[i]]=i;
+                    }
             }
-            else{
-                m1[nums[i]]=i;
-            }
-        }
-        return ans;
+            return ans;
     }
 };
