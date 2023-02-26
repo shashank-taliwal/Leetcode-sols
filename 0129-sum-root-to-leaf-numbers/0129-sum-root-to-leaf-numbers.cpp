@@ -36,9 +36,6 @@ public:
             if(root==NULL)return 0;
         vector<int> numbers;
         getNumbers(root,numbers,{});
-            for(int i=0;i<numbers.size();i++){
-                    cout<<numbers[i]<<endl;
-            }
         int sum=0;
             for(int i=0;i<numbers.size();i++){
                     sum+=numbers[i];
