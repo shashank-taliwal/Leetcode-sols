@@ -1,6 +1,6 @@
 class Solution {
-    int getFirstIndex(vector<int>& nums){
-        int n=nums.size();
+    int getFirstIndex(vector<int>& nums, int n){
+        // int n=nums.size();
         for(int i=n-2;i>=0;i--){
             if(nums[i]<nums[i+1]){
                 return i;
@@ -8,8 +8,8 @@ class Solution {
         }
         return -1;
     }
-    int getSecondIndex(int ind1, vector<int>& nums){
-        int n=nums.size();
+    int getSecondIndex(int ind1, vector<int>& nums, int n){
+        // int n=nums.size();
         int ans=-1;
         int value=INT_MAX;
         for(int i=n-1;i>ind1;i--){
@@ -28,13 +28,13 @@ public:
         //Step4 Mark this value as ind2
         //Step5 Swap(A[ind1],A[ind2])
         //Step6 Reverse[A[ind1+1]..............n)
-        int ind1=getFirstIndex(nums);
+        int n=nums.size();
+        int ind1=getFirstIndex(nums,n);
             if(ind1==-1){
             reverse(nums.begin(),nums.end());
                 return;
         }
-        int ind2=getSecondIndex(ind1,nums);
-        // cout<<"99999999";
+        int ind2=getSecondIndex(ind1,nums,n);
         swap(nums[ind1],nums[ind2]);
         reverse(nums.begin()+ind1+1,nums.end());
     }
