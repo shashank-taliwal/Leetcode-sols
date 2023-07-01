@@ -6,7 +6,6 @@ class Solution {
         return true;
     }
     void dfs(vector<vector<char>>& grid, vector<vector<int>>& visited, int x, int y){
-        cout<<x<<" "<<y<<endl;
         visited[x][y]=1;
         int rows=grid.size();
         int cols=grid[0].size();
@@ -16,7 +15,6 @@ class Solution {
         for(int i=0;i<4;i++){
             int x0=x+dx[i];
             int y0=y+dy[i];
-            cout<<x0<<" "<<y0<<endl;
             if(isValid(x0,y0,rows,cols) and visited[x0][y0]==0 and grid[x0][y0]=='1'){
                 dfs(grid,visited,x0,y0);
             }
