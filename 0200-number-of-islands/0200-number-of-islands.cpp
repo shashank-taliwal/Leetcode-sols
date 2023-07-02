@@ -1,50 +1,79 @@
+class UnionFind{
+  private:
+    map<pair<int,int>,pair<int,int>> parent;
+    map<pair<int,int>,int> size;
+    public:
+    UnionFind(vector<pair<int,int>> v1){
+        for(pair<int,int> p: v1){
+            parent[p]=p;
+            size[p]=0;
+        }
+    }
+    pair<int,int> getParent(pair<int,int> node){
+        if(node==parent[node]){
+            return parent[node];
+        }
+        return parent[node]=getParent(parent[node]);
+    }
+    void combine(pair<int,int> node1, pair<int,int> node2){
+        node1=getParent(node1);
+        node2=getParent(node2);
+        
+        if(size[node1]>=size[node2]){
+            size[node1]+=size[node2];
+            parent[node2]=node1;
+        }
+        else{
+            size[node2]+=size[node1];
+            parent[node1]=node2;
+        }
+    }
+};
+
+
 class Solution {
-    private:
+public:
     bool isValid(int x, int y, int rows, int cols){
-        if(x<0 or x>=rows or y>=cols or y<0){
+        if(x<0 or x>=rows or y<0 or y>=cols){
             return false;
         }
         return true;
     }
-    void bfs(vector<vector<char>>& grid, vector<vector<int>>& visited, int x, int y){
-        queue<pair<int,int>> q;
-        int rows=grid.size();
-        int cols=grid[0].size();
-        int dx[4]={1,-1,0,0};
-        int dy[4]={0,0,1,-1};
-        q.push({x,y});
-        visited[x][y]=1;
-        while(!q.empty()){
-            int x0=q.front().first;
-            int y0=q.front().second;
-            q.pop();
-            for(int i=0;i<4;i++){
-                int x1=x0+dx[i];
-                int y1=y0+dy[i];
-                
-                if(isValid(x1,y1,rows,cols) and grid[x1][y1]=='1' and !visited[x1][y1]){
-                    q.push({x1,y1});
-                    visited[x1][y1]=true;
-                }
-            }
-        }
-        
-    }
-public:
     int numIslands(vector<vector<char>>& grid) {
-        //Approach 2 BFS
+        // Approach3 using Union Find (By union-by-size and Path-compression)
+        
+        vector<pair<int,int>> coords;
         int rows=grid.size();
         int cols=grid[0].size();
-        vector<vector<int>> visited(rows,vector<int>(cols,0));
-        int cc=0;
+        
         for(int i=0;i<rows;i++){
             for(int j=0;j<cols;j++){
-                if(grid[i][j]=='1' and visited[i][j]==0){
-                    cc++;
-                    bfs(grid,visited,i,j);
+                if(grid[i][j]=='1'){
+                    coords.push_back({i,j});
                 }
             }
         }
-        return cc;
+        UnionFind dsu(coords);
+        int dx[4]={1,-1,0,0};
+        int dy[4]={0,0,1,-1};
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                if(grid[i][j]=='1'){
+                    for(int k=0;k<4;k++){
+                        int x0=i+dx[k];
+                        int y0=j+dy[k];
+                        
+                        if(isValid(x0,y0,rows,cols) and grid[x0][y0]=='1'){
+                            dsu.combine({i,j},{x0,y0});
+                        }
+                    }
+                }
+            }
+        }
+        set<pair<int,int>> s1;
+        for(pair<int,int> coord: coords){
+            s1.insert(dsu.getParent(coord));
+        }
+        return s1.size();
     }
 };
