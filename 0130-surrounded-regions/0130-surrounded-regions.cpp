@@ -7,7 +7,6 @@ class Solution {
     }
     void dfs(vector<vector<char>>& board, vector<vector<int>>& visited, int x, int y, set<pair<int,int>>& boundaryNodes){
         visited[x][y]=1;
-        cout<<x<<" "<<y<<endl;
         boundaryNodes.insert({x,y});
         int rows=board.size();
         int cols=board[0].size();
