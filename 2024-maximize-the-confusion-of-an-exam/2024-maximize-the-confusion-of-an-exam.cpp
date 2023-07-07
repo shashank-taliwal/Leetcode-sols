@@ -11,15 +11,13 @@ public:
         int cnt0=0,cnt1=0;
         int ans=0;
         for(right=0;right<n;right++){
-            // cout<<left<<" "<<right<<endl;
             if(answerKey[right]=='F'){
                 cnt0++;
             }
             else{
                 cnt1++;
             }
-            // cout<<cnt0<<" "<<cnt1<<endl;
-            // cout<<"---------------------------------"<<endl;
+            
             while(min(cnt1,cnt0)>k){
                 if(answerKey[left]=='F'){
                     cnt0--;
