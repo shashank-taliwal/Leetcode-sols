@@ -7,11 +7,6 @@ public:
         int n=graph.size();
         map<int,vector<int>> adj;
         vector<int> outDegree(n,0);
-        // for(vector<int> node: graph){
-        //     for(int neighs: node){
-        //         outDegree[neighs]++;
-        //     }
-        // }
         for(int i=0;i<n;i++){
             outDegree[i]+=graph[i].size();
             for(int j=0;j<graph[i].size();j++){
