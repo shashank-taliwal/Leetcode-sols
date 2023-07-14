@@ -5,7 +5,7 @@ public:
         int ans=-1;
         for(int num: arr){
             int x=num-difference;
-            if(subs.find(x)!=subs.end()){
+            if(subs[x]){
                 subs[num]=max(subs[num],subs[x]+1);
             }
             else{
