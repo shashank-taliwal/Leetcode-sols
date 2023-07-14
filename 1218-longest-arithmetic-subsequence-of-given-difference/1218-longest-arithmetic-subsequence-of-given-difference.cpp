@@ -2,6 +2,7 @@ class Solution {
 public:
     int longestSubsequence(vector<int>& arr, int difference) {
         unordered_map<int,int> subs;
+        int ans=-1;
         for(int num: arr){
             int x=num-difference;
             if(subs.find(x)!=subs.end()){
@@ -10,10 +11,7 @@ public:
             else{
                 subs[num]=1;
             }
-        }
-        int ans=-1;
-        for(auto it: subs){
-            ans=max(ans,it.second);
+            ans=max(ans,subs[num]);
         }
         return ans;
     }
